@@ -75,4 +75,4 @@ Hoặc:
 * Thuật toán: solve_backtracking, solve_cp, solve_bfs, solve_astar
 * Dữ liệu puzzle mẫu: PUZZLES
 * GUI: FlowFreeApp với các phương thức khởi tạo, sự kiện, hiển thị, giải puzzle
-link github:https://github.com/phantrongphu123/project_AI
+## Link github:https://github.com/phantrongphu123/project_AI
