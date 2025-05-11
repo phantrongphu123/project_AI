@@ -1,1 +1,11 @@
-pygame
+# Yêu cầu tối thiểu để chạy Flow Free Solver
+
+# GUI (Tkinter có sẵn với Python, không cần cài)
+# Nếu muốn vẽ biểu đồ benchmark, cài thêm matplotlib:
+matplotlib
+
+# Nếu muốn sử dụng thuật toán Constraint Programming (CP):
+ortools
+
+# Nếu có sử dụng pygame cho hiệu ứng hoặc giao diện:
+Tkinter
