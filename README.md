@@ -1,15 +1,10 @@
 # Flow Free Solver & Benchmarker - Galaxy Edition
 
-![Flow Free GUI](./pics/gui_demo.png)
-*Giao diện chính của ứng dụng Flow Free Solver*
-
----
-
 ## Giới thiệu
 
-Flow Free là một trò chơi giải đố logic, nơi bạn cần nối các cặp điểm màu giống nhau trên lưới sao cho các đường đi không cắt nhau và lấp đầy toàn bộ lưới. Dự án này cung cấp:
+Flow Free là trò chơi giải đố logic, mục tiêu là nối các cặp điểm màu trên lưới sao cho các đường đi không cắt nhau và lấp đầy toàn bộ lưới. Dự án này cung cấp:
 - Công cụ giải tự động nhiều loại puzzle Flow Free với nhiều thuật toán khác nhau.
-- Giao diện trực quan, dễ sử dụng, chủ đề "Galaxy".
+- Giao diện trực quan, chủ đề "Galaxy".
 - Chức năng benchmark, so sánh hiệu suất các thuật toán, hiển thị biểu đồ trực quan.
 
 ---
@@ -26,40 +21,22 @@ Flow Free là một trò chơi giải đố logic, nơi bạn cần nối các c
 
 ## Tính năng nổi bật
 
-- **Giao diện đồ họa (Tkinter):**  
-  ![Chọn thuật toán](./pics/algorithm_select.png)
-  *Chọn thuật toán và heuristic trực tiếp trên giao diện*
-
-- **Nhiều thuật toán giải:**
-    - Backtracking (Quay lui tối ưu)
-    - Breadth-First Search (BFS)
-    - A* Search (A sao) với nhiều heuristic
-    - Constraint Programming (CP) với Google OR-Tools (nếu có)
-    - Simulated Annealing, Q-Learning (nếu có)
-
-- **Benchmark & Biểu đồ:**  
-  ![Benchmark Table](./pics/benchmark_table.png)
-  *Kết quả benchmark các thuật toán trên nhiều puzzle*
-
-  ![Benchmark Chart](./pics/benchmark_chart.png)
-  *Biểu đồ so sánh thời gian giải của các thuật toán*
-
-- **Tối ưu heuristic cho A\*:**  
-  ![Heuristic Compare](./pics/heuristic_compare.png)
-  *So sánh hiệu quả các heuristic trên cùng một puzzle*
-
-- **Chạy từ dòng lệnh:**  
-  Hỗ trợ benchmark tự động, xuất file CSV, cấu hình thuật toán, puzzle, giới hạn thời gian...
+- **Giao diện đồ họa (Tkinter)**
+- Nhiều thuật toán giải: Backtracking, BFS, A*, Constraint Programming (CP), Simulated Annealing, Q-Learning.
+- Benchmark & biểu đồ so sánh hiệu suất.
+- Tối ưu heuristic cho A*.
+- Chạy từ dòng lệnh, xuất file CSV.
 
 ---
 
 ## Yêu cầu hệ thống
 
 - Python 3.7+
-- Tkinter (mặc định có sẵn với Python)
+- Tkinter (có sẵn với Python)
 - **Tùy chọn:**  
     - `matplotlib` (vẽ biểu đồ)
     - `ortools` (thuật toán CP)
+    - `pygame` (nếu dùng hiệu ứng)
 
 ---
 
@@ -149,8 +126,59 @@ Hoặc:
 
 ## Một số hình ảnh minh họa
 
-| Giao diện chính | Chọn thuật toán | Bảng benchmark | Biểu đồ benchmark | So sánh heuristic |
-|-----------------|----------------|----------------|-------------------|-------------------|
-| ![GUI](./pics/gui_demo.png) | ![Thuật toán](./pics/algorithm_select.png) | ![Bảng benchmark](./pics/benchmark_table.png) | ![Biểu đồ](./pics/benchmark_chart.png) | ![Heuristic](./pics/heuristic_compare.png) |
+### Giao diện chính
+![Giao diện chính](./pics/gui_demo.png)
+
+### Chọn thuật toán
+![Chọn thuật toán](./pics/algorithm_select.png)
+
+### Bảng benchmark
+![Bảng benchmark](./pics/benchmark_table.png)
+
+### Biểu đồ benchmark
+![Biểu đồ benchmark](./pics/benchmark_chart.png)
+
+### So sánh heuristic
+![So sánh heuristic](./pics/heuristic_compare.png)
+
+### Một số thuật toán khác
+#### Giải bằng A*
+![A*](./pics/solve_with_Astar.png)
+
+#### Giải bằng Backtracking
+![Backtracking](./pics/solve_with_backtracking.png)
+
+#### Giải bằng BFS
+![BFS](./pics/solve_with_bfs.png)
+
+#### Giải bằng CP
+![CP](./pics/solve_with_cp.png)
+
+#### Giải bằng Q-Learning
+![Q-Learning](./pics/solve_with_qlearning.png)
+
+#### Giải bằng Simulated Annealing
+![Simulated Annealing](./pics/solve_with_sa.png)
+
+#### Benchmark tổng hợp
+![Benchmark tổng hợp](./pics/benchmark66.png)
+
+#### Biểu đồ phụ 1
+![Biểu đồ phụ 1](./pics/graph01.png)
+
+#### Biểu đồ phụ 2
+![Biểu đồ phụ 2](./pics/graph02.png)
+
+#### Biểu đồ phụ 3
+![Biểu đồ phụ 3](./pics/graph03.png)
+
+#### Heuristic Q-Learning
+![Heuristic Q-Learning](./pics/heuristicQlearning.png)
+
+#### Lưu kết quả benchmark
+![Lưu benchmark](./pics/saveBenchmark.png)
+
+#### Lưu benchmark CSV
+![Lưu benchmark CSV](./pics/saveBenchmarkCSV.png)
 
 ---
