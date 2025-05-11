@@ -127,19 +127,10 @@ Hoặc:
 ## Một số hình ảnh minh họa
 
 ### Giao diện chính
-![Giao diện chính](./pics/gui_demo.png)
-
-### Chọn thuật toán
-![Chọn thuật toán](./pics/algorithm_select.png)
+![Giao diện chính](./pics/main.png)
 
 ### Bảng benchmark
 ![Bảng benchmark](./pics/benchmark_table.png)
-
-### Biểu đồ benchmark
-![Biểu đồ benchmark](./pics/benchmark_chart.png)
-
-### So sánh heuristic
-![So sánh heuristic](./pics/heuristic_compare.png)
 
 ### Một số thuật toán khác
 #### Giải bằng A*
@@ -174,6 +165,9 @@ Hoặc:
 
 #### Heuristic Q-Learning
 ![Heuristic Q-Learning](./pics/heuristicQlearning.png)
+
+#### Heuristic AStar
+![Heuristic AStar](./pics/heuristicA.png)
 
 #### Lưu kết quả benchmark
 ![Lưu benchmark](./pics/saveBenchmark.png)
