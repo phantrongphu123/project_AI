@@ -156,7 +156,6 @@ Hoặc:
 
 
 #### Giải bằng Simulated Annealing
-![Simulated Annealing](./pics/solve_with_sa.png)
 ![Simulated Annealing](https://github.com/user-attachments/assets/a8d3796f-1a2a-4eb1-9adb-653caebe6f08)
 
 #### Benchmark tổng hợp
