@@ -137,24 +137,21 @@ Hoặc:
 ![A*](./pics/solve_with_Astar.png)
 
 #### Giải bằng Backtracking
-![Backtracking](./pics/solve_with_backtracking.png)
 
+![Backtracking](https://github.com/user-attachments/assets/11dc518a-5e41-48b8-a103-6a9663ea72b5)
 
-https://github.com/user-attachments/assets/c8c1a348-4682-460a-88fc-69b40732085b
 
 
 #### Giải bằng BFS
-![BFS](./pics/solve_with_bfs.png)
 
 ![BFS](https://github.com/user-attachments/assets/26b366cd-f6f9-485f-9bb5-116d01c032f6)
 
 #### Giải bằng CP
-![CP](./pics/solve_with_cp.png)
 ![CP](https://github.com/user-attachments/assets/9afc8a06-9064-45ca-ac7f-3f01a0248285)
 
 
 #### Giải bằng Q-Learning
-![Q-Learning](./pics/solve_with_qlearning.png)
+![Q-Learning](https://github.com/user-attachments/assets/98121f7f-85c9-49ca-88d7-68979a8aeae4)
 
 
 #### Giải bằng Simulated Annealing
