@@ -134,7 +134,8 @@ Hoặc:
 
 ### Một số thuật toán khác
 #### Giải bằng A*
-![A*](./pics/solve_with_Astar.png)
+![ A*](https://github.com/user-attachments/assets/198ec9f3-7e4f-4bba-b794-29a18fcb11d4)
+
 
 #### Giải bằng Backtracking
 
