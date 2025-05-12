@@ -146,14 +146,20 @@ https://github.com/user-attachments/assets/c8c1a348-4682-460a-88fc-69b40732085b
 #### Giải bằng BFS
 ![BFS](./pics/solve_with_bfs.png)
 
+![BFS](https://github.com/user-attachments/assets/26b366cd-f6f9-485f-9bb5-116d01c032f6)
+
 #### Giải bằng CP
 ![CP](./pics/solve_with_cp.png)
+![CP](https://github.com/user-attachments/assets/9afc8a06-9064-45ca-ac7f-3f01a0248285)
+
 
 #### Giải bằng Q-Learning
 ![Q-Learning](./pics/solve_with_qlearning.png)
 
+
 #### Giải bằng Simulated Annealing
 ![Simulated Annealing](./pics/solve_with_sa.png)
+![Simulated Annealing](https://github.com/user-attachments/assets/a8d3796f-1a2a-4eb1-9adb-653caebe6f08)
 
 #### Benchmark tổng hợp
 ![Benchmark tổng hợp](./pics/benchmark66.png)
