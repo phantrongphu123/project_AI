@@ -139,6 +139,10 @@ Hoặc:
 #### Giải bằng Backtracking
 ![Backtracking](./pics/solve_with_backtracking.png)
 
+
+https://github.com/user-attachments/assets/c8c1a348-4682-460a-88fc-69b40732085b
+
+
 #### Giải bằng BFS
 ![BFS](./pics/solve_with_bfs.png)
 
