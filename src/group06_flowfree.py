@@ -23,8 +23,6 @@ except ImportError:
     MATPLOTLIB_AVAILABLE = False
     FigureCanvasTkAgg = None
     plt = None
-    # print("Cảnh báo: Thư viện Matplotlib chưa được cài đặt. Chức năng vẽ biểu đồ sẽ bị vô hiệu hóa.")
-    # print("Chạy: pip install matplotlib")
 
 # --- Kiểm tra và Import OR-Tools ---
 try:
@@ -37,7 +35,7 @@ except ImportError:
 BENCHMARK_MODE = False
 
 # ============================================================
-# HÀM TIỆN ÍCH VÀ PARSE (Giữ nguyên)
+# HÀM TIỆN ÍCH VÀ PARSE
 # ============================================================
 def get_neighbors(r, c, size):
     neighbors = []
@@ -185,7 +183,7 @@ def manhattan_distance(p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
 # ============================================================
-# HEURISTIC FUNCTIONS FOR A* (Giữ nguyên)
+# HEURISTIC FUNCTIONS FOR A*
 # ============================================================
 def h_manhattan_sum(paths_dict, color_order, size, grid_tuple=None):
     h = 0
@@ -235,7 +233,7 @@ AVAILABLE_QLEARNING_CONFIGS = {
     "Balanced": {"learning_rate": 0.15, "discount_factor": 0.9, "exploration_rate": 0.35, "episodes": 600},
 }
 # ============================================================
-# THUẬT TOÁN GIẢI (Giữ nguyên)
+# THUẬT TOÁN GIẢI
 # ============================================================
 def solve_simulated_annealing(puzzle_str, time_limit=60.0, initial_temp=100.0, cooling_rate=0.95, iterations_per_temp=100):
     global BENCHMARK_MODE
@@ -384,7 +382,116 @@ def solve_simulated_annealing(puzzle_str, time_limit=60.0, initial_temp=100.0, c
             if not BENCHMARK_MODE:
                 print(f"SA: No solution found in {solve_time:.4f} seconds")
     return solution_grid, solution_paths_dict, solve_time, states_explored
-
+def solve_and_or_search(puzzle_str, time_limit=60.0):
+    global BENCHMARK_MODE
+    start_time_total = time.time()
+    solution_grid = None
+    solution_paths_dict = None
+    states_explored = 0
+    
+    try:
+        initial_grid, colors_data, size, _ = parse_puzzle_extended(puzzle_str)
+        if initial_grid is None or not colors_data or size == 0:
+            raise ValueError("Invalid puzzle data")
+    except ValueError as e:
+        if not BENCHMARK_MODE: print(f"Lỗi parse puzzle cho AND-OR Search: {e}")
+        return None, None, time.time() - start_time_total, 0
+    
+    color_order = list(colors_data.keys())
+    memo = {}  # Memoization cache
+    
+    # Khởi tạo paths
+    initial_paths = {c: {'coords': [colors_data[c]['start']], 
+                         'target': colors_data[c]['end'], 
+                         'complete': False} 
+                    for c in color_order}
+    
+    def and_or_search(grid, unfinished_colors, current_paths):
+        nonlocal states_explored, start_time_total
+        states_explored += 1
+        
+        if time.time() - start_time_total > time_limit:
+            return None, None
+        
+        # Nếu tất cả màu đã hoàn thành
+        if not unfinished_colors:
+            if is_grid_full(grid, size):
+                return grid, current_paths
+            return None, None
+        
+        # Memoization key
+        grid_tuple = tuple(map(tuple, grid))
+        unfinished_tuple = tuple(sorted(unfinished_colors))
+        memo_key = (grid_tuple, unfinished_tuple)
+        
+        if memo_key in memo:
+            return memo[memo_key]
+        
+        # Nút OR: Chọn màu để mở rộng
+        # Sắp xếp theo khoảng cách Manhattan còn lại
+        colors_to_try = sorted(unfinished_colors, 
+                              key=lambda c: manhattan_distance(current_paths[c]['coords'][-1], 
+                                                            current_paths[c]['target']))
+        
+        for color in colors_to_try:
+            path_data = current_paths[color]
+            current_head = path_data['coords'][-1]
+            target = path_data['target']
+            
+            # Nút OR: Thử các hướng di chuyển có thể
+            neighbors = sorted(
+                get_neighbors(current_head[0], current_head[1], size),
+                key=lambda pos: manhattan_distance(pos, target)
+            )
+            
+            for nr, nc in neighbors:
+                # Kiểm tra điều kiện di chuyển hợp lệ
+                is_target = (nr, nc) == target
+                cell_value = grid[nr][nc]
+                is_valid_empty = (cell_value == 0)
+                is_valid_target = (is_target and cell_value == -color)
+                is_valid_move = is_valid_empty or is_valid_target
+                already_visited = (nr, nc) in path_data['coords']
+                
+                if is_valid_move and not already_visited:
+                    # Tạo trạng thái mới
+                    new_grid = [row[:] for row in grid]
+                    new_paths = copy.deepcopy(current_paths)
+                    
+                    # Cập nhật grid và path
+                    if is_valid_empty:
+                        new_grid[nr][nc] = color
+                    new_paths[color]['coords'].append((nr, nc))
+                    
+                    # Nếu đã đến đích, đánh dấu màu này đã hoàn thành
+                    new_unfinished = set(unfinished_colors)
+                    if is_target:
+                        new_paths[color]['complete'] = True
+                        new_unfinished.remove(color)
+                    
+                    # Nút AND: Tất cả các trạng thái con phải thành công
+                    result_grid, result_paths = and_or_search(new_grid, new_unfinished, new_paths)
+                    
+                    if result_grid:
+                        memo[memo_key] = (result_grid, result_paths)
+                        return result_grid, result_paths
+        
+        # Không tìm thấy giải pháp
+        memo[memo_key] = (None, None)
+        return None, None
+    
+    # Bắt đầu thuật toán AND-OR Search
+    if not BENCHMARK_MODE: print("Giải bằng AND-OR Search...")
+    solution_grid, solution_paths_internal = and_or_search(initial_grid, set(color_order), initial_paths)
+    
+    # Xử lý kết quả
+    if solution_grid and solution_paths_internal:
+        solution_paths_dict = {color: data['coords'] for color, data in solution_paths_internal.items()}
+    
+    solve_time = time.time() - start_time_total
+    if not BENCHMARK_MODE: print(f"Thời gian AND-OR Search: {solve_time:.4f} giây, Trạng thái: {states_explored}")
+    
+    return solution_grid, solution_paths_dict, solve_time, states_explored
 def solve_qlearning(puzzle_str, time_limit=60.0, episodes=500, config=None):
     global BENCHMARK_MODE
     start_time_total = time.time()
@@ -1394,14 +1501,14 @@ class FlowFreeApp:
         self.colors_data = {}; self.grid_labels = []
 
         self.selected_algorithm = tk.StringVar(value="CP" if ORTOOLS_AVAILABLE else "A*")
-        self.available_algorithms = ["Backtracking", "BFS", "A*", "CP", "Q-Learning", "Simulated Annealing"]
+        self.available_algorithms = ["Backtracking", "BFS", "A*", "CP", "Q-Learning", "Simulated Annealing", "AND-OR Search"]
         self.last_solve_algorithm = ""; self.last_solve_time = 0.0
         self.benchmark_results_data = None
 
         self.selected_heuristic_name = tk.StringVar(value=list(AVAILABLE_HEURISTICS.keys())[0])
         self.heuristic_to_use = AVAILABLE_HEURISTICS[self.selected_heuristic_name.get()]
         self.heuristic_optimizer_results = []
-        self.flow_colors = ['#330044'] + [ # Màu nền mặc định của ô (tím rất đậm)
+        self.flow_colors = ['#330044'] + [ # Màu nền mặc định của ô
             # Các màu sắc nổi bật và đa dạng hơn
             '#FF33CC',  # Hồng magenta sáng
             '#33FFFF',  # Cyan sáng
@@ -1414,7 +1521,7 @@ class FlowFreeApp:
             '#FF9933',  # Cam vàng
             '#0099FF',  # Xanh dương sáng
             '#CC33FF',  # Tím hồng
-            '#A0A0A0',  # Xám bạc (nếu cần thêm màu)
+            '#A0A0A0',  # Xám bạc
             '#FFD700',  # Gold
             '#FF69B4',  # HotPink
             '#ADFF2F',  # GreenYellow
@@ -1881,7 +1988,7 @@ class FlowFreeApp:
                     puzzle_string_copy, config=config)
                 solver_func = None
             elif algorithm_name == "Simulated Annealing": solver_func = solve_simulated_annealing
-
+            elif algorithm_name == "AND-OR Search": solver_func = solve_and_or_search
             if solver_func and algorithm_name != "Q-Learning":
                 solution_grid, solution_paths, solve_time, states_explored = solver_func(puzzle_string_copy)
             elif algorithm_name != "A*" and algorithm_name != "Q-Learning":
@@ -2281,7 +2388,7 @@ class FlowFreeApp:
         lf_algos.pack(fill=tk.X, pady=5)
         algo_vars = {}; algo_options_frame = ttk.Frame(lf_algos)
         algo_options_frame.pack(fill=tk.X, padx=5, pady=5)
-        all_algos_gui = ["Backtracking", "BFS", "A*", "Q-Learning", "Simulated Annealing"] + (["CP"] if ORTOOLS_AVAILABLE else [])
+        all_algos_gui = ["Backtracking", "BFS", "A*", "Q-Learning", "Simulated Annealing", "AND-OR Search"] + (["CP"] if ORTOOLS_AVAILABLE else [])
         for idx, name in enumerate(all_algos_gui):
             var = tk.BooleanVar(value=(name in ["A*"] or (name=="CP" and ORTOOLS_AVAILABLE)))
             chk = ttk.Checkbutton(algo_options_frame, text=name, variable=var, style="Galaxy.TCheckbutton")
@@ -2509,7 +2616,7 @@ class FlowFreeApp:
                     canvas_scroll_tab1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
                     scrollbar_y_tab1.pack(side=tk.RIGHT, fill=tk.Y)
 
-                    # Sắp xếp các mức độ khó theo thứ tự trong self.difficulty_levels (nếu có)
+                    # Sắp xếp các mức độ khó theo thứ tự trong self.difficulty_levels
                     sorted_difficulties_in_data = sorted(
                         all_puzzles_times_across_difficulties.keys(),
                         key=lambda d_name: self.difficulty_levels.index(d_name) if d_name in self.difficulty_levels else float('inf')
@@ -2584,7 +2691,7 @@ class FlowFreeApp:
                         solved_counts_all_puzzles[puzzle_key] += 1
 
                 if solved_counts_all_puzzles:
-                    # Sắp xếp các puzzle để hiển thị theo thứ tự (ví dụ: theo mức độ rồi theo index)
+                    # Sắp xếp các puzzle để hiển thị theo thứ tự
                     sorted_puzzle_keys = sorted(
                         solved_counts_all_puzzles.keys(),
                         key=lambda pk: (self.difficulty_levels.index(pk[0]) if pk[0] in self.difficulty_levels else float('inf'), pk[1])
@@ -2638,7 +2745,7 @@ class FlowFreeApp:
                     ttk.Label(tab2_frame, text="Không có dữ liệu giải thành công cho bất kỳ puzzle nào.",
                               style="GalaxyTitle.TLabel", justify=tk.CENTER).pack(padx=20, pady=20, expand=True, fill=tk.BOTH)
 
-            # --- Tab 3: Số Puzzle Giải Được / Thuật Toán (Giữ nguyên logic, vì nó đã tổng hợp trên toàn bộ benchmark) ---
+            # --- Tab 3: Số Puzzle Giải Được / Thuật Toán ---
             tab3_frame = ttk.Frame(notebook, style="TFrame")
             notebook.add(tab3_frame, text="Số Puzzle Giải Được / Thuật Toán (Tổng)")
 
@@ -2754,6 +2861,8 @@ def run_benchmark_suite(puzzles_to_test, algorithms_to_run, time_limit_per_run=6
                     elif algo_name == "CP": grid, paths, time_taken, states = solve_cp(puzzle_str, time_limit_per_run)
                     elif algo_name == "Simulated Annealing":
                         grid, paths, time_taken, states = solve_simulated_annealing(puzzle_str,time_limit=time_limit_per_run)
+                    elif algo_name == "AND-OR Search":
+                        grid, paths, time_taken, states = solve_and_or_search(puzzle_str, time_limit=time_limit_per_run)                    
                     elif algo_name == "Q-Learning":
                         q_config_for_benchmark = AVAILABLE_QLEARNING_CONFIGS["Default"]
                         episodes_for_benchmark = q_config_for_benchmark.get("episodes", 500)
@@ -2839,7 +2948,7 @@ def main():
     parser.add_argument("--run_benchmark", action="store_true", help="Chạy benchmark thay vì GUI.")
     parser.add_argument("--benchmark_time_limit", type=float, default=20.0, help="Time limit (s) / puzzle.")
     parser.add_argument("--benchmark_state_limit", type=int, default=100000, help="State limit (BFS/A*).")
-    default_algos = "A*,BFS,Backtracking,Simulated Annealing,Q-Learning"
+    default_algos = "A*,BFS,Backtracking,Simulated Annealing,Q-Learning,AND-OR Search,CP"
     if ORTOOLS_AVAILABLE:
         default_algos += ",CP"
     parser.add_argument("--algorithms", type=str, default=default_algos, help="Algorithms (comma-separated). 'ALL_AVAILABLE' for all.")
@@ -2853,7 +2962,7 @@ def main():
         if not MATPLOTLIB_AVAILABLE:
             print("Lưu ý: Matplotlib không khả dụng, sẽ không thể vẽ biểu đồ nếu có chức năng đó từ dòng lệnh.")
 
-        available_algos_cli = ["Backtracking", "BFS", "A*", "Simulated Annealing", "Q-Learning"]
+        available_algos_cli = ["Backtracking", "BFS", "A*", "Simulated Annealing", "Q-Learning", "AND-OR Search"]
         if ORTOOLS_AVAILABLE:
             available_algos_cli.append("CP")
 
