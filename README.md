@@ -30,13 +30,14 @@ Việc áp dụng hiệu quả các thuật toán tìm kiếm đòi hỏi một 
 Dự án đã triển khai và tích hợp một loạt các thuật toán AI để giải quyết bài toán Flow Free, mỗi thuật toán có cách tiếp cận và đặc điểm riêng:
 
 **6.1. Backtracking:** Thuật toán này hoạt động dựa trên nguyên lý thử-sai có hệ thống. Nó xây dựng giải pháp từng bước cho mỗi màu, ưu tiên mở rộng một màu cho đến khi hoàn thành hoặc gặp ngõ cụt. Nếu không thể đi tiếp hoặc các bước sau không dẫn đến lời giải, nó sẽ "quay lui" lại lựa chọn trước đó và thử một hướng đi khác. Mặc dù đơn giản và không tốn nhiều bộ nhớ, hiệu suất của Backtracking phụ thuộc nhiều vào thứ tự duyệt và có thể chậm với các puzzle phức tạp.
+
 ![Backtracking](https://github.com/user-attachments/assets/39d883e6-3ff7-407f-a53f-2e23468a2fb0)
 
 **6.2. Breadth-First Search (BFS):** BFS khám phá không gian trạng thái theo từng lớp, đảm bảo tìm ra lời giải nông nhất nếu tồn tại. Nó sử dụng một hàng đợi để quản lý các trạng thái (bao gồm lưới, thông tin các đường đi, và màu đang được mở rộng) và một tập `visited` để tránh chu trình. BFS hoàn chỉnh nhưng đòi hỏi không gian bộ nhớ lớn.
 
 ![BFS](https://github.com/user-attachments/assets/8e6fff8b-8085-4b9e-89ba-ec2ffdd41d16)
 
-**6.3. A* Search:** Đây là một thuật toán tìm kiếm có thông tin, sử dụng hàm đánh giá `f(n) = g(n) + h(n)` để hướng dẫn quá trình tìm kiếm. `g(n)` là chi phí thực tế (số ô đã vẽ) và `h(n)` là chi phí ước lượng đến đích. Dự án triển khai nhiều hàm heuristic như tổng khoảng cách Manhattan, khoảng cách Manhattan lớn nhất, và một biến thể kết hợp trung bình Manhattan với hình phạt cho các đường chưa hoàn thành. A* hiệu quả hơn BFS nếu có heuristic tốt và đảm bảo tối ưu nếu heuristic là "admissible".
+**6.3. A** Search:** Đây là một thuật toán tìm kiếm có thông tin, sử dụng hàm đánh giá `f(n) = g(n) + h(n)` để hướng dẫn quá trình tìm kiếm. `g(n)` là chi phí thực tế (số ô đã vẽ) và `h(n)` là chi phí ước lượng đến đích. Dự án triển khai nhiều hàm heuristic như tổng khoảng cách Manhattan, khoảng cách Manhattan lớn nhất, và một biến thể kết hợp trung bình Manhattan với hình phạt cho các đường chưa hoàn thành. A* hiệu quả hơn BFS nếu có heuristic tốt và đảm bảo tối ưu nếu heuristic là "admissible".
 
 ![a_start](https://github.com/user-attachments/assets/1dde7240-65b6-4a4c-a59f-3f03cfb75f88)
 
