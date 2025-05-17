@@ -33,22 +33,29 @@ Dự án đã triển khai và tích hợp một loạt các thuật toán AI đ
 ![Backtracking](https://github.com/user-attachments/assets/39d883e6-3ff7-407f-a53f-2e23468a2fb0)
 
 **6.2. Breadth-First Search (BFS):** BFS khám phá không gian trạng thái theo từng lớp, đảm bảo tìm ra lời giải nông nhất nếu tồn tại. Nó sử dụng một hàng đợi để quản lý các trạng thái (bao gồm lưới, thông tin các đường đi, và màu đang được mở rộng) và một tập `visited` để tránh chu trình. BFS hoàn chỉnh nhưng đòi hỏi không gian bộ nhớ lớn.
+
 ![BFS](https://github.com/user-attachments/assets/8e6fff8b-8085-4b9e-89ba-ec2ffdd41d16)
-***6.3. A* Search:** Đây là một thuật toán tìm kiếm có thông tin, sử dụng hàm đánh giá `f(n) = g(n) + h(n)` để hướng dẫn quá trình tìm kiếm. `g(n)` là chi phí thực tế (số ô đã vẽ) và `h(n)` là chi phí ước lượng đến đích. Dự án triển khai nhiều hàm heuristic như tổng khoảng cách Manhattan, khoảng cách Manhattan lớn nhất, và một biến thể kết hợp trung bình Manhattan với hình phạt cho các đường chưa hoàn thành. A* hiệu quả hơn BFS nếu có heuristic tốt và đảm bảo tối ưu nếu heuristic là "admissible".
+
+**6.3. A* Search:** Đây là một thuật toán tìm kiếm có thông tin, sử dụng hàm đánh giá `f(n) = g(n) + h(n)` để hướng dẫn quá trình tìm kiếm. `g(n)` là chi phí thực tế (số ô đã vẽ) và `h(n)` là chi phí ước lượng đến đích. Dự án triển khai nhiều hàm heuristic như tổng khoảng cách Manhattan, khoảng cách Manhattan lớn nhất, và một biến thể kết hợp trung bình Manhattan với hình phạt cho các đường chưa hoàn thành. A* hiệu quả hơn BFS nếu có heuristic tốt và đảm bảo tối ưu nếu heuristic là "admissible".
+
 ![a_start](https://github.com/user-attachments/assets/1dde7240-65b6-4a4c-a59f-3f03cfb75f88)
 
 **6.4. Constraint Programming (CP) với OR-Tools:** Cách tiếp cận này mô hình hóa Flow Free như một bài toán thỏa mãn ràng buộc (CSP). Các biến Boolean `is_path[r][c][k]` biểu thị ô `(r,c)` có thuộc đường đi của màu `k` hay không. Các ràng buộc bao gồm: mỗi ô chỉ thuộc một đường đi, các điểm đầu/cuối phải được gán đúng màu, và tính liên tục của đường đi (mỗi ô trên đường đi phải có đúng 2 hàng xóm cùng màu, trừ điểm đầu/cuối chỉ có 1). OR-Tools sau đó được sử dụng để tìm một phép gán thỏa mãn tất cả ràng buộc. Đây là một phương pháp mạnh mẽ, khai báo, nhưng đòi hỏi việc tái tạo đường đi từ kết quả lưới.
+
 ![CP](https://github.com/user-attachments/assets/3a942542-745b-4342-8c43-02211c9246e0)
 
 **6.5. Q-Learning:** Thuật toán học tăng cường này cho phép một tác nhân học chiến lược giải thông qua tương tác thử-sai với môi trường. Trạng thái được định nghĩa bởi lưới và màu đang hoạt động, hành động là việc chọn ô tiếp theo. Hàm Q `Q(s,a)` ước lượng chất lượng của hành động. Phần thưởng được thiết kế để khuyến khích hoàn thành các màu và lấp đầy lưới. Sau nhiều episodes học, Q-table được sử dụng để đưa ra quyết định tối ưu.
+
 ![q-learning](https://github.com/user-attachments/assets/4e394393-a1e5-405a-b7c8-56744dc84ac3)
 
 
 **6.6. Simulated Annealing:** Thuật toán tối ưu hóa này bắt đầu với một giải pháp ngẫu nhiên và cố gắng cải thiện dần bằng cách thực hiện các thay đổi nhỏ. Nó có khả năng chấp nhận các bước đi "tệ hơn" với một xác suất nhất định (giảm dần theo "nhiệt độ") để tránh bị kẹt ở các điểm tối ưu cục bộ. Hàm năng lượng đánh giá chất lượng giải pháp dựa trên số ô trống, khoảng cách chưa hoàn thành, v.v.
+
 ![simulated](https://github.com/user-attachments/assets/5165609e-b457-499a-8e78-b4bbd0aef0e6)
 
 
 **6.7. AND-OR Search:** Thuật toán này được thiết kế cho các bài toán có thể phân rã. Trong Flow Free, mỗi trạng thái lưới có thể xem là một nút OR, nơi tác nhân chọn một màu và một hướng đi. Vì game là tất định, hành động đó dẫn đến một trạng thái mới duy nhất. Quá trình tìm kiếm tương tự DFS có cấu trúc, nhằm tìm một chuỗi hành động dẫn đến mục tiêu.
+
 ![and_or-search](https://github.com/user-attachments/assets/8c245352-b0c5-4455-8755-be0fb3493059)
 
 
