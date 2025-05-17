@@ -1,41 +1,5 @@
 # Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
 
-## 1. Cấu trúc thư mục 
-
-project_AI_extracted/
-└── project_AI/
-    ├── gui_benchmark_results_20250512_052922.csv
-    ├── main.py
-    ├── README.md
-    └── reports/
-        ├── Nhom06_BaoCao
-        ├──  ├── Nhom06_BaoCao
-    └── src/
-        ├── group06_flowfree.py
-    ├── requirements.txt
-    ├── .git
-    └── pics/
-        ├── benchmark66.png
-        ├── benchmark_table.png
-        ├── graph01.png
-        ├── graph02.png
-        ├── graph03.png
-        ├── heuristicA.png
-        ├── heuristicQlearning.png
-        ├── main.png
-        ├── saveBenchmark.png
-        ├── saveBenchmarkCSV.png
-        ├── solve_with_Astar.png
-        ├── solve_with_backtracking.png
-        ├── solve_with_bfs.png
-        ├── solve_with_cp.png
-        ├── solve_with_qlearning.png
-        └── solve_with_qlearning_2.png
-
-
-
-# Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
-
 ## Giới thiệu
 
 Flow Free là trò chơi giải đố logic, mục tiêu là nối các cặp điểm màu trên lưới sao cho các đường đi không cắt nhau và lấp đầy toàn bộ lưới. Dự án này cung cấp:
@@ -58,24 +22,24 @@ Flow Free là trò chơi giải đố logic, mục tiêu là nối các cặp đ
 
 project_AI_extracted/
 └── project_AI/
-    ├── gui_benchmark_results_20250512_052922.csv
-    ├── main.py
-    ├── README.md
-    └── reports/
-        ├── Nhom06_BaoCao
-        ├──  ├── Nhom06_BaoCao
-    └── src/
-        ├── group06_flowfree.py
-    ├── requirements.txt
-    ├── .git
-    └── pics/
+├── gui_benchmark_results_20250512_052922.csv
+├── main.py
+├── README.md
+└── reports/
+└──  Nhom06_BaoCao
+     ├── Nhom06_BaoCao
+├── src/
+├── group06_flowfree.py
+├── requirements.txt
+├── .git
+└── pics/
         ├── benchmark66.png
         ├── benchmark_table.png
         ├── graph01.png
         ├── graph02.png
         ├── graph03.png
         ├── heuristicA.png
-        ├── heuristicQlearning.png
+        ├── heuristicQlearning.png   
         ├── main.png
         ├── saveBenchmark.png
         ├── saveBenchmarkCSV.png
@@ -85,7 +49,6 @@ project_AI_extracted/
         ├── solve_with_cp.png
         ├── solve_with_qlearning.png
         └── solve_with_qlearning_2.png
-
 
 ## Tính năng nổi bật
 
