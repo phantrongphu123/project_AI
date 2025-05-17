@@ -74,4 +74,6 @@ Dự án vẫn còn nhiều tiềm năng phát triển. Về mặt GUI, có th�
 
 ## 10. Tác giả
 
-*   (Điền tên các thành viên trong nhóm của bạn vào đây)
+23133056 - Phan Trọng Phú
+23133056 - Phan Trọng Quí
+23133061 - Đỗ Kiến Hưng
