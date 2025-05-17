@@ -1,9 +1,36 @@
 # Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
 
-## 1. Giới thiệu
+## 1. Cấu trúc thư mục 
 
-Bài toán Flow Free là một trò chơi giải đố logic phổ biến, thử thách người chơi nối các cặp điểm màu trên một lưới ô vuông. Mục tiêu là tạo ra các đường đi (flows) sao cho mỗi đường nối đúng cặp màu của nó, các đường đi của màu khác nhau không được giao nhau, và toàn bộ lưới phải được lấp đầy. Đồ án này được thực hiện với mục tiêu chính là xây dựng một phiên giải đố của game Flow Free có giao diện đồ họa, đồng thời triển khai và ứng dụng các thuật toán tìm kiếm trong trí tuệ nhân tạo để tự động hóa việc tìm lời giải. Bên cạnh đó, một phần quan trọng của đồ án là cung cấp công cụ để so sánh và đánh giá hiệu năng của các thuật toán này trên nhiều màn chơi với độ khó đa dạng, cũng như minh họa trực quan quá trình giải của chúng.
-
+project_AI_extracted/
+└── project_AI/
+    ├── gui_benchmark_results_20250512_052922.csv
+    ├── main.py
+    ├── README.md
+    └── reports/
+        ├── Nhom06_BaoCao
+        ├──  ├── Nhom06_BaoCao
+    └── src/
+        ├── group06_flowfree.py
+    ├── requirements.txt
+    ├── .git
+    └── pics/
+        ├── benchmark66.png
+        ├── benchmark_table.png
+        ├── graph01.png
+        ├── graph02.png
+        ├── graph03.png
+        ├── heuristicA.png
+        ├── heuristicQlearning.png
+        ├── main.png
+        ├── saveBenchmark.png
+        ├── saveBenchmarkCSV.png
+        ├── solve_with_Astar.png
+        ├── solve_with_backtracking.png
+        ├── solve_with_bfs.png
+        ├── solve_with_cp.png
+        ├── solve_with_qlearning.png
+        └── solve_with_qlearning_2.png
 ## 2. Các tính năng chính
 
 Dự án nổi bật với giao diện người dùng đồ họa được xây dựng bằng Tkinter, mang lại trải nghiệm trực quan và dễ sử dụng. Người dùng có thể dễ dàng lựa chọn các màn chơi từ nhiều mức độ khó khác nhau, từ "Tiny" đến "Very Hard". Điểm cốt lõi của dự án là việc triển khai một loạt các thuật toán AI bao gồm Backtracking, Breadth-First Search (BFS), A* Search với nhiều tùy chọn heuristic, Constraint Programming (CP) sử dụng  OR-Tools, Q-Learning, Simulated Annealing, và AND-OR Search. Các thuật toán này cho phép tự động tìm lời giải cho puzzle đã chọn, và kết quả đường đi sẽ được vẽ trực quan trên lưới, thậm chí có hiệu ứng hoạt ảnh sinh động. Một bộ công cụ Benchmarking Suite mạnh mẽ cũng được tích hợp, cho phép chạy tự động các thuật toán trên một tập hợp puzzle, ghi nhận chi tiết thời gian giải, số trạng thái duyệt, và kết quả cuối cùng. Dữ liệu benchmark này có thể được lưu dưới dạng file CSV và hiển thị thành các biểu đồ so sánh hiệu năng nếu thư viện Matplotlib được cài đặt. Ngoài ra, dự án còn cung cấp các công cụ chuyên biệt để đánh giá hiệu quả của các hàm heuristic khác nhau cho thuật toán A* và các cấu hình siêu tham số cho Q-Learning.
