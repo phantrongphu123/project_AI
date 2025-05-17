@@ -1,4 +1,4 @@
-![si-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/fd7f2f6c-8969-4376-9b74-da75fd9be589)# Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
+# Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
 
 ## 1. Giới thiệu
 
