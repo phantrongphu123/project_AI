@@ -28,6 +28,7 @@ project_AI_extracted/
 │   ├── reports/
 │   │   └── Nhom06_BaoCao/
 │   │       └── Nhom06_BaoCao
+│   │       └── Nhom06_BaoCao.ppt
 │   ├── src/
 │   │   └── group06_flowfree.py
 │   ├── requirements.txt
