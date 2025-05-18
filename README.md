@@ -1,4 +1,4 @@
-# Báo cáo Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
+# Đồ án: Xây dựng Game Flow Free và Ứng dụng các Thuật toán Tìm kiếm AI
 
 ## Giới thiệu
 
@@ -56,9 +56,10 @@ project_AI_extracted/
 ## Tính năng nổi bật
 
 - **Giao diện đồ họa (Tkinter)**
-- Nhiều thuật toán giải: Backtracking, BFS, A*, Constraint Programming (CP), Simulated Annealing, Q-Learning.
+- Nhiều thuật toán giải: Backtracking, BFS, A*, Constraint Programming (CP), Simulated Annealing, Q-Learning, AND-OR Search.
 - Benchmark & biểu đồ so sánh hiệu suất.
 - Tối ưu heuristic cho A*.
+- Tối ưu config cho Q-Learning.
 - Chạy từ dòng lệnh, xuất file CSV.
 
 ---
@@ -70,8 +71,6 @@ project_AI_extracted/
 - **Tùy chọn:**  
     - `matplotlib` (vẽ biểu đồ)
     - `ortools` (thuật toán CP)
-    - `pygame` (nếu dùng hiệu ứng)
-
 ---
 
 ## Hướng dẫn sử dụng
@@ -83,11 +82,6 @@ Giao diện người dùng của ứng dụng được thiết kế trực quan 
 python main.py
 ```
 
-### Chạy benchmark từ dòng lệnh
-
-```bash
-python main.py --run_benchmark --algorithms="A*,BFS" --puzzles="Easy (5x5)"
-```
 
 ### Sử dụng GUI
 
@@ -96,17 +90,18 @@ python main.py --run_benchmark --algorithms="A*,BFS" --puzzles="Easy (5x5)"
 3. Nhấn **Giải & Vẽ** để giải puzzle.
 4. Nhấn **Reset Puzzle** để làm mới.
 5. Chạy benchmark bằng nút tương ứng.
-6. Xem biểu đồ nếu đã chạy benchmark và có matplotlib.
+6. Xem biểu đồ nếu đã chạy benchmark.
 
 ---
 
 ## Các thuật toán được triển khai
 
-- **Backtracking (Quay lui):** DFS tối ưu, ưu tiên theo khoảng cách Manhattan.
-- **BFS:** Tìm kiếm theo chiều rộng.
-- **A\* Search:** Dùng heuristic để dẫn đường tìm kiếm.
-- **Constraint Programming:** Dùng Google OR-Tools, mô hình hóa bằng ràng buộc.
-- **Simulated Annealing, Q-Learning:** (nếu có)
+- **Backtracking (Nhóm CSPs):** DFS tối ưu, ưu tiên theo khoảng cách Manhattan.
+- **BFS (Uninformed Search):** Tìm kiếm theo chiều rộng.
+- **A\* Search (Informed Search):** Dùng heuristic để dẫn đường tìm kiếm.
+- **Constraint Programming (Nhóm CSPs):** Dùng Google OR-Tools, mô hình hóa bằng ràng buộc.
+- **Simulated Annealing (Local Search):** 	Tối ưu hóa gần đúng, cho phép nhảy khỏi cực tiểu cục bộ.
+- **AND-OR Search (Complex Environments):** 	Sử dụng trong môi trường không xác định hoặc mục tiêu tổ hợp.
 
 ---
 
@@ -115,6 +110,8 @@ python main.py --run_benchmark --algorithms="A*,BFS" --puzzles="Easy (5x5)"
 - Manhattan Sum
 - Manhattan Max
 - Manhattan Avg + Incomplete Penalty
+
+## Config cho Q-Learning
 
 ---
 
@@ -147,7 +144,7 @@ Hoặc:
 - Import thư viện
 - Hàm tiện ích: `get_neighbors`, `parse_puzzle_extended`, ...
 - Heuristic: `h_manhattan_sum`, `h_manhattan_max`, ...
-- Thuật toán: `solve_backtracking`, `solve_cp`, `solve_bfs`, `solve_astar`
+- Thuật toán: `solve_backtracking`, `solve_cp`, `solve_bfs`, `solve_astar`, ...
 - Dữ liệu puzzle mẫu: `PUZZLES`
 - GUI: `FlowFreeApp` với các phương thức khởi tạo, sự kiện, hiển thị, giải puzzle
 
