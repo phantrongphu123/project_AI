@@ -213,7 +213,7 @@ Dự án đã triển khai và tích hợp một loạt các thuật toán AI đ
 #### Biểu đồ phụ 3
 ![Biểu đồ phụ 3](./pics/graph03.png)
 
-#### Heuristic Q-Learning
+#### Config Q-Learning
 ![Heuristic Q-Learning](./pics/heuristicQlearning.png)
 
 #### Heuristic AStar
