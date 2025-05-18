@@ -102,6 +102,7 @@ python main.py
 - **Constraint Programming (Nhóm CSPs):** Dùng Google OR-Tools, mô hình hóa bằng ràng buộc.
 - **Simulated Annealing (Local Search):** 	Tối ưu hóa gần đúng, cho phép nhảy khỏi cực tiểu cục bộ.
 - **AND-OR Search (Complex Environments):** 	Sử dụng trong môi trường không xác định hoặc mục tiêu tổ hợp.
+- **Q-Learning (Reinforcement Learning):** 		Agent học cách tối ưu hành động thông qua phần thưởng môi trường, không cần mô hình môi trường.
 
 ---
 
